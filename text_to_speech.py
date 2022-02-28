@@ -1,18 +1,17 @@
-import os
+import os  # used to check file size of txt file on line 9
 from gtts import gTTS  # google text to speech conversion module
-import time  # used to delay while loop to check for the file contents, on line 7.
-from os.path import exists as file_exists  # checks if a txt file exists, used on line 5.
+import time  # used to delay while loop to check for the file contents, on line 8.
+from os.path import exists as file_exists  # checks if a txt file exists, used on line 6.
 
 if file_exists('text_to_read.txt'):  # if the txt file exists
-    while True:  # check the file has text and copy it into the variable mytext
+    while True:  # infinite loop to check the file
         time.sleep(2)  # wait 2 to recheck the file for contents.
-        filesize = os.path.getsize('text_to_read.txt')
-        if filesize == 0:
+        file_size = os.path.getsize('text_to_read.txt') # check if the file has a size
+        if file_size == 0:  # if file is empty
             print('The file is empty.')
-        else:
-            # copy the text into mytext variable
+        else:  # if the file has contents
             f = open('text_to_read.txt', 'r+')  # open the file
-            mytext = f.read()
+            mytext = f.read()  # copy the text into mytext variable
 
             # passes the text variable and language to gTTS module
             convert_this = gTTS(text=mytext, lang='en')
@@ -21,8 +20,8 @@ if file_exists('text_to_read.txt'):  # if the txt file exists
             # saves in the same folder as this program on your computer
             convert_this.save("audio.mp3")
 
-            f.truncate(0)
-            f.close()
+            f.truncate(0)  # removes contents of txt file
+            f.close()  # closes the txt file
             print('Audio file created................')
 else:
     print('File does not exist.')
