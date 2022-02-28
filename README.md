@@ -1,4 +1,4 @@
-# text_to_speech_microservice
+# CS361 Assignment: text_to_speech_microservice
 
 Reads the contents of a text file and converts it to audio. 
 
